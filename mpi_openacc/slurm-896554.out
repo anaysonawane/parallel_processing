@@ -1,0 +1,799 @@
++ module unload icc
+++ /usr/bin/modulecmd bash unload icc
++ eval
++ module load pgi
+++ /usr/bin/modulecmd bash load pgi
++ eval
++ module load mpi/pgi_openmpi
+++ /usr/bin/modulecmd bash load mpi/pgi_openmpi
++ eval LD_LIBRARY_PATH=/opt/packages/pgi/linux86-64/16.10/lib:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/lib ';export' 'LD_LIBRARY_PATH;LM_LICENSE_FILE=/opt/packages/pgi/license.dat' ';export' 'LM_LICENSE_FILE;LOADEDMODULES=psc_path/1.1:slurm/15.08.8:mpi/pgi_openmpi:pgi/16.10' ';export' 'LOADEDMODULES;MANPATH=/opt/packages/pgi/linux86-64/16.10/man:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/share/man:/opt/packages/slurm/15.08.8/share/man:/usr/local/man:/usr/share/man:/opt/packages/slash2/psc/man:/usr/local/man:/usr/share/man:/opt/packages/slash2/psc/man' ';export' 'MANPATH;PATH=/opt/packages/pgi/linux86-64/16.10/bin:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/bin:/usr/lib64/qt-3.3/bin:/opt/packages/slurm/15.08.8/bin:/opt/packages/allocations:/opt/packages/interact/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/puppetlabs/puppet/bin:/opt/packages/slash2/psc/sbin:/opt/puppetlabs/bin:/home/sonawane/.local/bin:/home/sonawane/bin:/opt/puppetlabs/puppet/bin:/opt/packages/slash2/psc/sbin' ';export' 'PATH;_LMFILES_=/opt/modulefiles/psc_path/1.1:/opt/modulefiles/slurm/15.08.8:/opt/modulefiles/mpi/pgi_openmpi:/opt/modulefiles/pgi/16.10' ';export' '_LMFILES_;unset' 'CC;unset' 'CPP;unset' 'CXX;unset' 'F77;unset' 'F90;unset' 'FC;unset' 'PGI;'
+++ LD_LIBRARY_PATH=/opt/packages/pgi/linux86-64/16.10/lib:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/lib
+++ export LD_LIBRARY_PATH
+++ LM_LICENSE_FILE=/opt/packages/pgi/license.dat
+++ export LM_LICENSE_FILE
+++ LOADEDMODULES=psc_path/1.1:slurm/15.08.8:mpi/pgi_openmpi:pgi/16.10
+++ export LOADEDMODULES
+++ MANPATH=/opt/packages/pgi/linux86-64/16.10/man:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/share/man:/opt/packages/slurm/15.08.8/share/man:/usr/local/man:/usr/share/man:/opt/packages/slash2/psc/man:/usr/local/man:/usr/share/man:/opt/packages/slash2/psc/man
+++ export MANPATH
+++ PATH=/opt/packages/pgi/linux86-64/16.10/bin:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/bin:/usr/lib64/qt-3.3/bin:/opt/packages/slurm/15.08.8/bin:/opt/packages/allocations:/opt/packages/interact/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/puppetlabs/puppet/bin:/opt/packages/slash2/psc/sbin:/opt/puppetlabs/bin:/home/sonawane/.local/bin:/home/sonawane/bin:/opt/puppetlabs/puppet/bin:/opt/packages/slash2/psc/sbin
+++ export PATH
+++ _LMFILES_=/opt/modulefiles/psc_path/1.1:/opt/modulefiles/slurm/15.08.8:/opt/modulefiles/mpi/pgi_openmpi:/opt/modulefiles/pgi/16.10
+++ export _LMFILES_
+++ unset CC
+++ unset CPP
+++ unset CXX
+++ unset F77
+++ unset F90
+++ unset FC
+++ unset PGI
++ mpicc -acc -ta=telsa:cuda8.0 floyd_mpicc.c
+pgcc-Error-Switch -ta with unknown keyword telsa:cuda8.0
+-ta=tesla:{cc20|cc30|cc35|cc50|cc60|cuda7.0|cuda7.5|cuda8.0|fastmath|[no]flushz|[no]fma|keepbin|keepgpu|keepptx|[no]lineinfo|[no]llvm|loadcache:{L1|L2}|maxregcount:<n>|pinned|[no]rdc|safecache|[no]unroll|managed|beta}|nvidia|radeon:{keep|[no]llvm|[no]unroll|tahiti|capeverde|spectre|hawaii|buffercount:<n>}|host|multicore
+                    Choose target accelerator
+    tesla           Select NVIDIA Tesla accelerator target
+     cc20           Compile for compute capability 2.0
+     cc30           Compile for compute capability 3.0
+     cc35           Compile for compute capability 3.5
+     cc50           Compile for compute capability 5.0
+     cc60           Compile for compute capability 6.0
+     cuda7.0        Use CUDA 7.0 Toolkit compatibility (default)
+     cuda7.5        Use CUDA 7.5 Toolkit compatibility
+     cuda8.0        Use CUDA 8.0 Toolkit compatibility, where installed
+     fastmath       Use fast math library
+     [no]flushz     Enable flush-to-zero mode on the GPU
+     [no]fma        Generate fused mul-add instructions (default at -O3)
+     keepbin        Keep kernel .bin files
+     keepgpu        Keep kernel source files
+     keepptx        Keep kernel .ptx files
+     [no]lineinfo   Generate GPU line information
+     [no]llvm       Use LLVM back end
+     loadcache      Choose what hardware level cache to use for global memory loads
+      L1            Use L1 cache
+      L2            Use L2 cache
+     maxregcount:<n>
+                    Set maximum number of registers to use on the GPU
+     pinned         Use CUDA Pinned Memory
+     [no]rdc        Generate relocatable device code
+     safecache      Allows variable-sized array sections in cache directives and assumes they fit into CUDA shared memory
+     [no]unroll     Enable automatic inner loop unrolling (default at -O3)
+     managed        Use CUDA Managed Memory
+     beta           Enable beta code generation features
+    nvidia          nvidia is a synonym for tesla
+    radeon          Select AMD Radeon GPU accelerator target
+     keep           Keep kernel source files
+     [no]llvm       Use LLVM/SPIR back end
+     [no]unroll     Enable automatic inner loop unrolling (default at -O3)
+     tahiti         Compile for Radeon Tahiti architecture (default)
+     capeverde      Compile for Radeon Capeverde architecture
+     spectre        Compile for Radeon Spectre architecture
+     hawaii         Compile for Radeon Hawaii architecture
+     buffercount:<n>
+                    Set max number of device buffers used by OpenCL kernel
+    host            Compile for the host, i.e., no accelerator target
+    multicore       Compile for a multicore host, i.e., no accelerator target
++ for var in 1 2 4 5 8 10 16 20
++ mpirun -n 1 ./a.out 2000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+-------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code.. Per user-direction, the job has been aborted.
+-------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[37493,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
++ for var in 1 2 4 5 8 10 16 20
++ mpirun -n 2 ./a.out 2000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+-------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code.. Per user-direction, the job has been aborted.
+-------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[37387,1],1]
+  Exit code:    1
+--------------------------------------------------------------------------
+[r432.pvt.bridges.psc.edu:32328] 1 more process has sent help message help-mpi-common-cuda.txt / dlopen failed
+[r432.pvt.bridges.psc.edu:32328] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for var in 1 2 4 5 8 10 16 20
++ mpirun -n 4 ./a.out 2000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+-------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code.. Per user-direction, the job has been aborted.
+-------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[37404,1],2]
+  Exit code:    1
+--------------------------------------------------------------------------
+[r432.pvt.bridges.psc.edu:32351] 3 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r432.pvt.bridges.psc.edu:32351] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for var in 1 2 4 5 8 10 16 20
++ mpirun -n 5 ./a.out 2000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+-------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code.. Per user-direction, the job has been aborted.
+-------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[37437,1],1]
+  Exit code:    1
+--------------------------------------------------------------------------
+[r432.pvt.bridges.psc.edu:32382] 4 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r432.pvt.bridges.psc.edu:32382] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for var in 1 2 4 5 8 10 16 20
++ mpirun -n 8 ./a.out 2000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+-------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code.. Per user-direction, the job has been aborted.
+-------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[37602,1],1]
+  Exit code:    1
+--------------------------------------------------------------------------
+[r432.pvt.bridges.psc.edu:32417] 7 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r432.pvt.bridges.psc.edu:32417] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for var in 1 2 4 5 8 10 16 20
++ mpirun -n 10 ./a.out 2000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+-------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code.. Per user-direction, the job has been aborted.
+-------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[37523,1],2]
+  Exit code:    1
+--------------------------------------------------------------------------
+[r432.pvt.bridges.psc.edu:32464] 9 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r432.pvt.bridges.psc.edu:32464] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for var in 1 2 4 5 8 10 16 20
++ mpirun -n 16 ./a.out 2000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+-------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code.. Per user-direction, the job has been aborted.
+-------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[37700,1],7]
+  Exit code:    1
+--------------------------------------------------------------------------
+[r432.pvt.bridges.psc.edu:32519] 15 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r432.pvt.bridges.psc.edu:32519] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for var in 1 2 4 5 8 10 16 20
++ mpirun -n 20 ./a.out 2000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+Current file:     /home/sonawane/program3/mpi_openacc/floyd_mpicc.c
+        function: compute_shortest_paths
+        line:     142
+Current region was compiled for:
+  NVIDIA Tesla GPU sm20 sm30 sm35 sm30 sm35 sm50 sm60
+Available accelerators:
+  device[1]: Native X86 (CURRENT DEVICE)
+The accelerator does not match the profile for which this program was compiled
+-------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code.. Per user-direction, the job has been aborted.
+-------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[37653,1],7]
+  Exit code:    1
+--------------------------------------------------------------------------
+[r432.pvt.bridges.psc.edu:32598] 19 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r432.pvt.bridges.psc.edu:32598] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
