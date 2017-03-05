@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
 int n, i, j;
 int* arr;
 struct timeval start_time, stop_time, elapsed_time;
+double total_time, perf;
 
 printf("Enter the dimensions of matrix: \n");
 scanf("%d",&n);
@@ -54,9 +55,13 @@ compute_shortest_paths(arr,n);
 gettimeofday(&stop_time, NULL);
 
 timersub(&stop_time, &start_time, &elapsed_time);
-printf("Total time was %f seconds.\n", elapsed_time.tv_sec+elapsed_time.tv_usec/1000000.0);
 
-/*printf("output: \n");
+total_time =(double)( elapsed_time.tv_sec+elapsed_time.tv_usec/1000000.0);
+perf = 2*pow(n,3)/(total_time*pow(10,9));
+
+printf("Total_Time=%f Performance=%lf\n",total_time,perf);
+
+printf("output: \n");
 for(i=0;i<n;i++)
 {
 	for(j=0;j<n;j++)
@@ -64,7 +69,7 @@ for(i=0;i<n;i++)
 		printf("%d ", arr[i*n+j]);
 	}
 	printf("\n");
-}*/
+}
 
 
 }
@@ -75,16 +80,17 @@ void compute_shortest_paths (int* a, int n)
    int	i, j, k;
   #pragma acc data copy(a[0:n*n])
   {
-  #pragma acc kernels
-  #pragma acc loop auto
    for (k = 0; k < n; k++)
    {
-      #pragma acc loop auto  
+      #pragma acc parallel
+      {
+      #pragma acc loop independent
       for (i = 0; i < n; i++){
-         #pragma acc loop auto
+         #pragma acc loop independent
          for (j = 0; j < n; j++)
          	a[i*n+j]= MIN(a[i*n+j], a[i*n+k] + a[k*n+j]);
-      }
+      } 
+     }
    }
  }	
 }
