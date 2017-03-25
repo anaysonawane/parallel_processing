@@ -1,0 +1,181 @@
++ MAX_NUM_THREADS=28
++ NUM_THREADS=1
++ module unload icc
+++ /usr/bin/modulecmd bash unload icc
++ eval
++ module load pgi
+++ /usr/bin/modulecmd bash load pgi
++ eval CC=/opt/packages/pgi/linux86-64/16.10/bin/pgcc ';export' 'CC;CPP=/opt/packages/pgi/linux86-64/16.10/bin/pgcc' ';export' 'CPP;CXX=/opt/packages/pgi/linux86-64/16.10/bin/pgc++' ';export' 'CXX;F77=/opt/packages/pgi/linux86-64/16.10/bin/pgf77' ';export' 'F77;F90=/opt/packages/pgi/linux86-64/16.10/bin/pgf90' ';export' 'F90;FC=/opt/packages/pgi/linux86-64/16.10/bin/pgfortran' ';export' 'FC;PGI=/opt/packages/pgi' ';export' 'PGI;'
+++ CC=/opt/packages/pgi/linux86-64/16.10/bin/pgcc
+++ export CC
+++ CPP=/opt/packages/pgi/linux86-64/16.10/bin/pgcc
+++ export CPP
+++ CXX=/opt/packages/pgi/linux86-64/16.10/bin/pgc++
+++ export CXX
+++ F77=/opt/packages/pgi/linux86-64/16.10/bin/pgf77
+++ export F77
+++ F90=/opt/packages/pgi/linux86-64/16.10/bin/pgf90
+++ export F90
+++ FC=/opt/packages/pgi/linux86-64/16.10/bin/pgfortran
+++ export FC
+++ PGI=/opt/packages/pgi
+++ export PGI
++ module load mpi/pgi_openmpi
+++ /usr/bin/modulecmd bash load mpi/pgi_openmpi
++ eval LD_LIBRARY_PATH=/opt/packages/pgi/linux86-64/16.10/lib:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/lib ';export' 'LD_LIBRARY_PATH;LM_LICENSE_FILE=/opt/packages/pgi/license.dat' ';export' 'LM_LICENSE_FILE;LOADEDMODULES=psc_path/1.1:slurm/15.08.8:mpi/pgi_openmpi:pgi/16.10' ';export' 'LOADEDMODULES;MANPATH=/opt/packages/pgi/linux86-64/16.10/man:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/share/man:/opt/packages/slurm/15.08.8/share/man:/usr/local/man:/usr/share/man:/opt/packages/slash2/psc/man' ';export' 'MANPATH;PATH=/opt/packages/pgi/linux86-64/16.10/bin:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/bin:/usr/lib64/qt-3.3/bin:/opt/packages/slurm/15.08.8/bin:/opt/packages/allocations:/opt/packages/interact/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/puppetlabs/puppet/bin:/opt/packages/slash2/psc/sbin:/opt/puppetlabs/bin:/home/sonawane/.local/bin:/home/sonawane/bin' ';export' 'PATH;_LMFILES_=/opt/modulefiles/psc_path/1.1:/opt/modulefiles/slurm/15.08.8:/opt/modulefiles/mpi/pgi_openmpi:/opt/modulefiles/pgi/16.10' ';export' '_LMFILES_;unset' 'CC;unset' 'CPP;unset' 'CXX;unset' 'F77;unset' 'F90;unset' 'FC;unset' 'PGI;'
+++ LD_LIBRARY_PATH=/opt/packages/pgi/linux86-64/16.10/lib:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/lib
+++ export LD_LIBRARY_PATH
+++ LM_LICENSE_FILE=/opt/packages/pgi/license.dat
+++ export LM_LICENSE_FILE
+++ LOADEDMODULES=psc_path/1.1:slurm/15.08.8:mpi/pgi_openmpi:pgi/16.10
+++ export LOADEDMODULES
+++ MANPATH=/opt/packages/pgi/linux86-64/16.10/man:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/share/man:/opt/packages/slurm/15.08.8/share/man:/usr/local/man:/usr/share/man:/opt/packages/slash2/psc/man
+++ export MANPATH
+++ PATH=/opt/packages/pgi/linux86-64/16.10/bin:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/bin:/usr/lib64/qt-3.3/bin:/opt/packages/slurm/15.08.8/bin:/opt/packages/allocations:/opt/packages/interact/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/puppetlabs/puppet/bin:/opt/packages/slash2/psc/sbin:/opt/puppetlabs/bin:/home/sonawane/.local/bin:/home/sonawane/bin
+++ export PATH
+++ _LMFILES_=/opt/modulefiles/psc_path/1.1:/opt/modulefiles/slurm/15.08.8:/opt/modulefiles/mpi/pgi_openmpi:/opt/modulefiles/pgi/16.10
+++ export _LMFILES_
+++ unset CC
+++ unset CPP
+++ unset CXX
+++ unset F77
+++ unset F90
+++ unset FC
+++ unset PGI
++ mpicc -mp -O2 cannon_openmpi.c
++ '[' 1 -lt 28 ']'
+++ expr 1 + 1
++ NUM_THREADS=2
++ export OMP_NUM_THREADS=2
++ OMP_NUM_THREADS=2
++ for var in 1 4 16
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 256
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=  0.143616 Peformance=0.233640
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 512
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=  0.440756 Peformance=0.609034
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 1000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=  1.030031 Peformance=1.941689
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 1024
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=  2.743976 Peformance=0.782618
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 2000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=  7.801026 Peformance=2.051012
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 2048
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time= 20.482950 Peformance=0.838740
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 3000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time= 31.090573 Peformance=1.736861
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 4096
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=903.100823 Peformance=0.152186
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 8192
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=7597.593271 Peformance=0.144718
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 16384
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+slurmstepd: *** JOB 931604 ON r517 CANCELLED AT 2017-03-24T11:13:39 DUE TO TIME LIMIT ***

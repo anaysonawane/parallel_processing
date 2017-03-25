@@ -1,0 +1,51 @@
++ for var in 1 4 16
++ for p in 256 512 1024 2048 4096
++ export OMP_NUM_THREADS=1
++ OMP_NUM_THREADS=1
++ ./a.out 256
+Threads=1 Total_time=0.140752 Performance=0.238394 
++ for p in 256 512 1024 2048 4096
++ export OMP_NUM_THREADS=1
++ OMP_NUM_THREADS=1
++ ./a.out 512
+Threads=1 Total_time=1.743971 Performance=0.153922 
++ for p in 256 512 1024 2048 4096
++ export OMP_NUM_THREADS=1
++ OMP_NUM_THREADS=1
++ ./a.out 1024
+Threads=1 Total_time=17.317826 Performance=0.124004 
++ for p in 256 512 1024 2048 4096
++ export OMP_NUM_THREADS=1
++ OMP_NUM_THREADS=1
++ ./a.out 2048
+Threads=1 Total_time=138.341674 Performance=0.124184 
++ for p in 256 512 1024 2048 4096
++ export OMP_NUM_THREADS=1
++ OMP_NUM_THREADS=1
++ ./a.out 4096
+Threads=1 Total_time=2567.622035 Performance=0.053528 
++ for var in 1 4 16
++ for p in 256 512 1024 2048 4096
++ export OMP_NUM_THREADS=4
++ OMP_NUM_THREADS=4
++ ./a.out 256
+Threads=4 Total_time=0.045031 Performance=0.745141 
++ for p in 256 512 1024 2048 4096
++ export OMP_NUM_THREADS=4
++ OMP_NUM_THREADS=4
++ ./a.out 512
+Threads=4 Total_time=0.356400 Performance=0.753186 
++ for p in 256 512 1024 2048 4096
++ export OMP_NUM_THREADS=4
++ OMP_NUM_THREADS=4
++ ./a.out 1024
+Threads=4 Total_time=3.413674 Performance=0.629083 
++ for p in 256 512 1024 2048 4096
++ export OMP_NUM_THREADS=4
++ OMP_NUM_THREADS=4
++ ./a.out 2048
+Threads=4 Total_time=27.111756 Performance=0.633669 
++ for p in 256 512 1024 2048 4096
++ export OMP_NUM_THREADS=4
++ OMP_NUM_THREADS=4
++ ./a.out 4096

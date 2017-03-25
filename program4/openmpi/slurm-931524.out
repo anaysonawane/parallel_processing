@@ -1,0 +1,647 @@
++ MAX_NUM_THREADS=28
++ NUM_THREADS=1
++ module unload icc
+++ /usr/bin/modulecmd bash unload icc
++ eval
++ module load pgi
+++ /usr/bin/modulecmd bash load pgi
++ eval CC=/opt/packages/pgi/linux86-64/16.10/bin/pgcc ';export' 'CC;CPP=/opt/packages/pgi/linux86-64/16.10/bin/pgcc' ';export' 'CPP;CXX=/opt/packages/pgi/linux86-64/16.10/bin/pgc++' ';export' 'CXX;F77=/opt/packages/pgi/linux86-64/16.10/bin/pgf77' ';export' 'F77;F90=/opt/packages/pgi/linux86-64/16.10/bin/pgf90' ';export' 'F90;FC=/opt/packages/pgi/linux86-64/16.10/bin/pgfortran' ';export' 'FC;PGI=/opt/packages/pgi' ';export' 'PGI;'
+++ CC=/opt/packages/pgi/linux86-64/16.10/bin/pgcc
+++ export CC
+++ CPP=/opt/packages/pgi/linux86-64/16.10/bin/pgcc
+++ export CPP
+++ CXX=/opt/packages/pgi/linux86-64/16.10/bin/pgc++
+++ export CXX
+++ F77=/opt/packages/pgi/linux86-64/16.10/bin/pgf77
+++ export F77
+++ F90=/opt/packages/pgi/linux86-64/16.10/bin/pgf90
+++ export F90
+++ FC=/opt/packages/pgi/linux86-64/16.10/bin/pgfortran
+++ export FC
+++ PGI=/opt/packages/pgi
+++ export PGI
++ module load mpi/pgi_openmpi
+++ /usr/bin/modulecmd bash load mpi/pgi_openmpi
++ eval LD_LIBRARY_PATH=/opt/packages/pgi/linux86-64/16.10/lib:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/lib ';export' 'LD_LIBRARY_PATH;LM_LICENSE_FILE=/opt/packages/pgi/license.dat' ';export' 'LM_LICENSE_FILE;LOADEDMODULES=psc_path/1.1:slurm/15.08.8:mpi/pgi_openmpi:pgi/16.10' ';export' 'LOADEDMODULES;MANPATH=/opt/packages/pgi/linux86-64/16.10/man:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/share/man:/opt/packages/slurm/15.08.8/share/man:/usr/local/man:/usr/share/man:/opt/packages/slash2/psc/man:/usr/local/man:/usr/share/man:/opt/packages/slash2/psc/man' ';export' 'MANPATH;PATH=/opt/packages/pgi/linux86-64/16.10/bin:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/bin:/usr/lib64/qt-3.3/bin:/opt/packages/slurm/15.08.8/bin:/opt/packages/allocations:/opt/packages/interact/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/puppetlabs/puppet/bin:/opt/packages/slash2/psc/sbin:/opt/puppetlabs/bin:/home/sonawane/.local/bin:/home/sonawane/bin:/opt/puppetlabs/puppet/bin:/opt/packages/slash2/psc/sbin' ';export' 'PATH;_LMFILES_=/opt/modulefiles/psc_path/1.1:/opt/modulefiles/slurm/15.08.8:/opt/modulefiles/mpi/pgi_openmpi:/opt/modulefiles/pgi/16.10' ';export' '_LMFILES_;unset' 'CC;unset' 'CPP;unset' 'CXX;unset' 'F77;unset' 'F90;unset' 'FC;unset' 'PGI;'
+++ LD_LIBRARY_PATH=/opt/packages/pgi/linux86-64/16.10/lib:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/lib
+++ export LD_LIBRARY_PATH
+++ LM_LICENSE_FILE=/opt/packages/pgi/license.dat
+++ export LM_LICENSE_FILE
+++ LOADEDMODULES=psc_path/1.1:slurm/15.08.8:mpi/pgi_openmpi:pgi/16.10
+++ export LOADEDMODULES
+++ MANPATH=/opt/packages/pgi/linux86-64/16.10/man:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/share/man:/opt/packages/slurm/15.08.8/share/man:/usr/local/man:/usr/share/man:/opt/packages/slash2/psc/man:/usr/local/man:/usr/share/man:/opt/packages/slash2/psc/man
+++ export MANPATH
+++ PATH=/opt/packages/pgi/linux86-64/16.10/bin:/opt/packages/pgi/linux86-64/2016/mpi/openmpi-1.10.2/bin:/usr/lib64/qt-3.3/bin:/opt/packages/slurm/15.08.8/bin:/opt/packages/allocations:/opt/packages/interact/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/puppetlabs/puppet/bin:/opt/packages/slash2/psc/sbin:/opt/puppetlabs/bin:/home/sonawane/.local/bin:/home/sonawane/bin:/opt/puppetlabs/puppet/bin:/opt/packages/slash2/psc/sbin
+++ export PATH
+++ _LMFILES_=/opt/modulefiles/psc_path/1.1:/opt/modulefiles/slurm/15.08.8:/opt/modulefiles/mpi/pgi_openmpi:/opt/modulefiles/pgi/16.10
+++ export _LMFILES_
+++ unset CC
+++ unset CPP
+++ unset CXX
+++ unset F77
+++ unset F90
+++ unset FC
+++ unset PGI
++ mpicc -mp -O cannon_openmpi.c
++ '[' 1 -lt 28 ']'
+++ expr 1 + 1
++ NUM_THREADS=2
++ export OMP_NUM_THREADS=2
++ OMP_NUM_THREADS=2
++ for var in 1 4 16
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 256
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=  0.148517 Peformance=0.225930
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 512
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=  0.451341 Peformance=0.594751
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 1000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=  2.102214 Peformance=0.951378
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 1024
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=  2.913349 Peformance=0.737119
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 2000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time= 15.689749 Peformance=1.019774
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 2048
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time= 22.082882 Peformance=0.777972
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 3000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time= 57.932469 Peformance=0.932120
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 4096
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=928.736146 Peformance=0.147985
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 8192
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+ORTE has lost communication with its daemon located on node:
+
+  hostname:  r723
+
+This is usually due to either a failure of the TCP network
+connection to the node, or possibly an internal failure of
+the daemon itself. We cannot recover from this failure, and
+therefore will terminate the job.
+
+--------------------------------------------------------------------------
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 16384
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+ORTE has lost communication with its daemon located on node:
+
+  hostname:  r723
+
+This is usually due to either a failure of the TCP network
+connection to the node, or possibly an internal failure of
+the daemon itself. We cannot recover from this failure, and
+therefore will terminate the job.
+
+--------------------------------------------------------------------------
++ for var in 1 4 16
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 4 ./a.out 256
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=4 Total_time=  0.196042 Peformance=0.171159
+[r712.pvt.bridges.psc.edu:21823] 3 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:21823] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 4 ./a.out 512
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=4 Total_time=  0.257417 Peformance=1.042804
+[r712.pvt.bridges.psc.edu:21863] 3 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:21863] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 4 ./a.out 1000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=4 Total_time=  0.507118 Peformance=3.943855
+[r712.pvt.bridges.psc.edu:21902] 3 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:21902] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 4 ./a.out 1024
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=4 Total_time=  0.609762 Peformance=3.521839
+[r712.pvt.bridges.psc.edu:21941] 3 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:21941] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 4 ./a.out 2000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=4 Total_time=  2.559676 Peformance=6.250791
+[r712.pvt.bridges.psc.edu:21980] 3 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:21980] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 4 ./a.out 2048
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=4 Total_time=  3.415158 Peformance=5.030476
+[r712.pvt.bridges.psc.edu:22019] 3 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:22019] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 4 ./a.out 3000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+[r712.pvt.bridges.psc.edu:22058] 3 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:22058] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+Processes=4 Total_time=  7.896811 Peformance=6.838203
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 4 ./a.out 4096
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+[r712.pvt.bridges.psc.edu:22105] 3 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:22105] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+Processes=4 Total_time= 25.280983 Peformance=5.436456
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 4 ./a.out 8192
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+[r712.pvt.bridges.psc.edu:22146] 3 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:22146] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+Processes=4 Total_time=877.105763 Peformance=1.253568
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 4 ./a.out 16384
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+[r712.pvt.bridges.psc.edu:22873] 3 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:22873] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+--------------------------------------------------------------------------
+ORTE has lost communication with its daemon located on node:
+
+  hostname:  r724
+
+This is usually due to either a failure of the TCP network
+connection to the node, or possibly an internal failure of
+the daemon itself. We cannot recover from this failure, and
+therefore will terminate the job.
+
+--------------------------------------------------------------------------
++ for var in 1 4 16
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 16 ./a.out 256
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=16 Total_time=  0.825970 Peformance=0.040624
+[r712.pvt.bridges.psc.edu:26649] 15 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:26649] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 16 ./a.out 512
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=16 Total_time=  0.981162 Peformance=0.273589
+[r712.pvt.bridges.psc.edu:26750] 15 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:26750] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 16 ./a.out 1000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=16 Total_time=  1.385964 Peformance=1.443039
+[r712.pvt.bridges.psc.edu:26849] 15 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:26849] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 16 ./a.out 1024
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=16 Total_time=  1.401247 Peformance=1.532552
+[r712.pvt.bridges.psc.edu:26949] 15 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:26949] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 16 ./a.out 2000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=16 Total_time=  2.294136 Peformance=6.974303
+[r712.pvt.bridges.psc.edu:27047] 15 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:27047] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 16 ./a.out 2048
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=16 Total_time=  3.035441 Peformance=5.659761
+[r712.pvt.bridges.psc.edu:27189] 15 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:27189] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 16 ./a.out 3000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=16 Total_time=  3.720828 Peformance=14.512899
+[r712.pvt.bridges.psc.edu:27287] 15 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:27287] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 16 ./a.out 4096
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+[r712.pvt.bridges.psc.edu:27387] 15 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:27387] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+Processes=16 Total_time= 14.955633 Peformance=9.189778
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 16 ./a.out 8192
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+[r712.pvt.bridges.psc.edu:27495] 15 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:27495] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+Processes=16 Total_time=101.534837 Peformance=10.828910
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 16 ./a.out 16384
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+[r712.pvt.bridges.psc.edu:27622] 15 more processes have sent help message help-mpi-common-cuda.txt / dlopen failed
+[r712.pvt.bridges.psc.edu:27622] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+Processes=16 Total_time=2728.182707 Peformance=3.224158
++ '[' 2 -lt 28 ']'
+++ expr 2 + 1
++ NUM_THREADS=3
++ export OMP_NUM_THREADS=3
++ OMP_NUM_THREADS=3
++ for var in 1 4 16
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 256
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=  0.152568 Peformance=0.219931
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 512
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=  0.459041 Peformance=0.584775
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 1000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=  1.058019 Peformance=1.890325
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 1024
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=  2.831118 Peformance=0.758528
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 2000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=  8.046418 Peformance=1.988462
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 2048
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time= 21.054317 Peformance=0.815978
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 3000
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time= 31.203734 Peformance=1.730562
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 4096
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+Processes=1 Total_time=907.813502 Peformance=0.151396
++ for N in 256 512 1000 1024 2000 2048 3000 4096 8192 16384
++ mpirun -n 1 ./a.out 8192
+--------------------------------------------------------------------------
+The library attempted to open the following supporting CUDA libraries, 
+but each of them failed.  CUDA-aware support is disabled.
+libcuda.so.1: cannot open shared object file: No such file or directory
+/usr/lib64/libcuda.so.1: cannot open shared object file: No such file or directory
+If you are not interested in CUDA-aware support, then run with 
+--mca mpi_cuda_support 0 to suppress this message.  If you are interested
+in CUDA-aware support, then try setting LD_LIBRARY_PATH to the location
+of libcuda.so.1 to get passed this issue.
+--------------------------------------------------------------------------
+slurmstepd: *** JOB 931524 ON r712 CANCELLED AT 2017-03-24T08:15:27 DUE TO TIME LIMIT ***
+--------------------------------------------------------------------------
+ORTE has lost communication with its daemon located on node:
+
+  hostname:  r714
+
+This is usually due to either a failure of the TCP network
+connection to the node, or possibly an internal failure of
+the daemon itself. We cannot recover from this failure, and
+therefore will terminate the job.
+
+--------------------------------------------------------------------------
