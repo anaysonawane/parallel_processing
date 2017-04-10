@@ -1,0 +1,27 @@
+#!/bin/bash
+#BATCH -p RM
+#SBATCH -t 0:10:00
+#SBATCH -N 4
+#SBATCH --ntasks-per-node 28
+
+#echo commands to stdout
+set -x
+
+module unload icc
+
+module load pgi
+#module load mpi/pgi_openmpi
+
+mpicc linear_mpi.c -lm
+
+for var in 2 4 28
+do
+	for p in 28 56 112 2800 5600
+	do
+		mpirun -n $var ./a.out $p
+	done
+done
+
+
+
+
