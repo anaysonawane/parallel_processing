@@ -1,0 +1,71 @@
++ module unload icc
+++ /usr/bin/modulecmd bash unload icc
++ eval LD_LIBRARY_PATH=/opt/packages/pgi/linux86-64/16.10/lib ';export' 'LD_LIBRARY_PATH;LOADEDMODULES=psc_path/1.1:slurm/15.08.8:pgi/16.10' ';export' 'LOADEDMODULES;MANPATH=/opt/packages/pgi/linux86-64/16.10/man:/opt/packages/slurm/15.08.8/share/man:/usr/local/man:/usr/share/man:/opt/packages/slash2/psc/man' ';export' 'MANPATH;PATH=/opt/packages/pgi/linux86-64/16.10/bin:/usr/lib64/qt-3.3/bin:/opt/packages/slurm/15.08.8/bin:/opt/packages/allocations:/opt/packages/interact/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/puppetlabs/puppet/bin:/opt/packages/slash2/psc/sbin:/opt/puppetlabs/bin:/home/sonawane/.local/bin:/home/sonawane/bin' ';export' 'PATH;_LMFILES_=/opt/modulefiles/psc_path/1.1:/opt/modulefiles/slurm/15.08.8:/opt/modulefiles/pgi/16.10' ';export' '_LMFILES_;unset' 'CLASSPATH;unset' 'CPATH;unset' 'DAALROOT;unset' 'GDBSERVER_MIC;unset' 'GDB_CROSS;unset' 'INFOPATH;unset' 'INTEL_LICENSE_FILE;unset' 'INTEL_PYTHONHOME;unset' 'IPPROOT;unset' 'I_MPI_ROOT;unset' 'LIBRARY_PATH;unset' 'MIC_LD_LIBRARY_PATH;unset' 'MIC_LIBRARY_PATH;unset' 'MKLROOT;unset' 'MPM_LAUNCHER;unset' 'NLSPATH;unset' 'TBBROOT;unset' 'arch;'
+++ LD_LIBRARY_PATH=/opt/packages/pgi/linux86-64/16.10/lib
+++ export LD_LIBRARY_PATH
+++ LOADEDMODULES=psc_path/1.1:slurm/15.08.8:pgi/16.10
+++ export LOADEDMODULES
+++ MANPATH=/opt/packages/pgi/linux86-64/16.10/man:/opt/packages/slurm/15.08.8/share/man:/usr/local/man:/usr/share/man:/opt/packages/slash2/psc/man
+++ export MANPATH
+++ PATH=/opt/packages/pgi/linux86-64/16.10/bin:/usr/lib64/qt-3.3/bin:/opt/packages/slurm/15.08.8/bin:/opt/packages/allocations:/opt/packages/interact/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/puppetlabs/puppet/bin:/opt/packages/slash2/psc/sbin:/opt/puppetlabs/bin:/home/sonawane/.local/bin:/home/sonawane/bin
+++ export PATH
+++ _LMFILES_=/opt/modulefiles/psc_path/1.1:/opt/modulefiles/slurm/15.08.8:/opt/modulefiles/pgi/16.10
+++ export _LMFILES_
+++ unset CLASSPATH
+++ unset CPATH
+++ unset DAALROOT
+++ unset GDBSERVER_MIC
+++ unset GDB_CROSS
+++ unset INFOPATH
+++ unset INTEL_LICENSE_FILE
+++ unset INTEL_PYTHONHOME
+++ unset IPPROOT
+++ unset I_MPI_ROOT
+++ unset LIBRARY_PATH
+++ unset MIC_LD_LIBRARY_PATH
+++ unset MIC_LIBRARY_PATH
+++ unset MKLROOT
+++ unset MPM_LAUNCHER
+++ unset NLSPATH
+++ unset TBBROOT
+++ unset arch
++ module load pgi
+++ /usr/bin/modulecmd bash load pgi
++ eval
++ mpicc psrs_mpi.c -lm
+/var/slurmd/job1024632/slurm_script: line 15: mpicc: command not found
++ for var in 2 5 10 14 28
++ for p in 2800 5600
++ mpirun -n 2 ./a.out 2800
+/var/slurmd/job1024632/slurm_script: line 21: mpirun: command not found
++ for p in 2800 5600
++ mpirun -n 2 ./a.out 5600
+/var/slurmd/job1024632/slurm_script: line 21: mpirun: command not found
++ for var in 2 5 10 14 28
++ for p in 2800 5600
++ mpirun -n 5 ./a.out 2800
+/var/slurmd/job1024632/slurm_script: line 21: mpirun: command not found
++ for p in 2800 5600
++ mpirun -n 5 ./a.out 5600
+/var/slurmd/job1024632/slurm_script: line 21: mpirun: command not found
++ for var in 2 5 10 14 28
++ for p in 2800 5600
++ mpirun -n 10 ./a.out 2800
+/var/slurmd/job1024632/slurm_script: line 21: mpirun: command not found
++ for p in 2800 5600
++ mpirun -n 10 ./a.out 5600
+/var/slurmd/job1024632/slurm_script: line 21: mpirun: command not found
++ for var in 2 5 10 14 28
++ for p in 2800 5600
++ mpirun -n 14 ./a.out 2800
+/var/slurmd/job1024632/slurm_script: line 21: mpirun: command not found
++ for p in 2800 5600
++ mpirun -n 14 ./a.out 5600
+/var/slurmd/job1024632/slurm_script: line 21: mpirun: command not found
++ for var in 2 5 10 14 28
++ for p in 2800 5600
++ mpirun -n 28 ./a.out 2800
+/var/slurmd/job1024632/slurm_script: line 21: mpirun: command not found
++ for p in 2800 5600
++ mpirun -n 28 ./a.out 5600
+/var/slurmd/job1024632/slurm_script: line 21: mpirun: command not found

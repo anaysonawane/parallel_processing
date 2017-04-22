@@ -1,0 +1,33 @@
+#!/bin/bash
+#SBATCH -N 1
+#SBATCH -p RM
+#SBATCH --ntasks-per-node 28
+#SBATCH -t 5:00:00
+
+#MAX_NUM_THREADS=28
+
+module load pgi
+
+pgcc -mp psrs_openmp.c
+
+# echo commands to stdout 
+set -x
+
+for var in 1 2 5 10 14 28 
+do
+	#N=100
+	#while [ $N -le 4000 ]
+ 	#do	
+ 	#	export OMP_NUM_THRADS=$var
+ 	#	#./a.out $N
+	#	N=`expr $N + 100`
+	#done
+		
+	for p in 2800 5600 28000 280000 
+	do
+		export OMP_NUM_THREADS=$var
+		./a.out $p
+	done
+done
+
+
